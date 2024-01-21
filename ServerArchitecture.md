@@ -13,5 +13,77 @@ It can be phased out once a game is released on steam or another distribution pl
 
 ```mermaid
 flowchart TD
-    foo("Press Launcher desktop shortcut / click Launcher.exe") --> bar("Start Launcher")
+    classDef user fill:#096
+    classDef code fill:#f96
+    classDef code_choice fill:#999
+    A1("Press Launcher desktop shortcut / click Launcher.exe"):::user
+    A2("press connect"):::user
+    A3("press update"):::user
+    A4("press play"):::user
+    A5("press X / Alt+F4 etc"):::user
+    P1("Start Launcher"):::code
+    P2("read ip/address+port from last session file"):::code
+    P3("leave ip/address+port empty"):::code
+    P4("Create UI window"):::code
+    P5("set server address label"):::code
+    P6("Connect to server and retrieve version number"):::code
+    P7("show version retrieve error message"):::code
+    P8("show current version"):::code
+    P9("check installed version"):::code
+    P10("display update button"):::code
+    P11("display play button"):::code
+    P12("erase installed version"):::code
+    P13("download given version"):::code
+    P14("show download error message"):::code
+    P15("extract downloaded version"):::code
+    P16("erase artifacts before trying again"):::code
+    P17("start game"):::code
+    PFinal("Close Launcher"):::code
+    C1{"last session file exists"}:::code_choice
+    C2{"success retrieving version?"}:::code_choice
+    C3{"same version?"}:::code_choice
+    C4{"download success?"}:::code_choice
+    C5{"extract success?"}:::code_choice
+
+    %%start launcher%%
+    A1 --> P1
+    P1 --> C1
+    C1 -- yes --> P2
+    C1 -- no --> P3
+    P2 & P3 --> P4
+    P4 --> P5
+
+    %%end%%
+    P5 & P7 & P10 & P11 & P16 --> A5
+    A5 --> PFinal
+
+    %%connect%%
+    P5 --> A2
+    A2 --> P6
+    P6 --> C2
+    C2 -- no --> P7
+    P7 -- retry or maybe change address --> A2
+    C2 -- yes --> P8
+    P8 --> P9
+    
+    %%update%%
+    P9 --> C3
+    C3 -- no --> P10
+    C3 -- yes --> P11
+    P10 --> A3
+    A3 --> P12
+    P12 --> P13
+    P13 --> C4
+    C4 -- no -->P14
+    P14 --> P16
+    P16 --> A3
+    C4 -- yes -->P15
+    P15 --> C5
+    C5 -- no --> A3
+    C5 -- yes --> P11
+
+    %%play%%
+    P11 --> A4
+    A4 --> P17
+    P17 --> PFinal
 ```

@@ -186,7 +186,7 @@ xy chart:
 Bugs and curiosities:
 
 Reminder that MerMaid processor that runs on github requires explicit quotations around nodes, whereas the live editor on MerMaid does not.
-Exact conditions could not be determined. Just be safe and always use spaces.
+Exact conditions could not be determined. Just be safe and always use qoutes.
 
 
 ```mermaid
