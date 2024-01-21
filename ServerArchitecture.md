@@ -27,22 +27,4 @@ flowchart TD
     success retrieving version? -- no --> show version retrieve error message
     show version retrieve error message -- retry or maybe change address --> press connect
     success retrieving version? -- yes --> show current version
-    show current version --> check installed version
-    check installed version --> same version?
-    same version? -- no --> display update button
-    same version? -- yes --> display play button
-    display update button --> press update
-    press update --> erase installed version
-    erase installed version --> download given version
-    download given version --> download success?
-    download success? -- no -->show download error message
-    show download error message --> erase artifacts before trying again
-    erase artifacts before trying again --> press update
-    download success? -- yes -->extract downloaded version
-    extract downloaded version --> extract success?
-    extract success? -- no --> press update
-    extract success? -- yes --> display play button
-    display play button --> press play
-    press play --> start game
-    start game --> Close Launcher
 ```
