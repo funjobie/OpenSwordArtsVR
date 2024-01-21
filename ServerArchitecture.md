@@ -13,38 +13,36 @@ It can be phased out once a game is released on steam or another distribution pl
 
 ```mermaid
 flowchart TD
-    classDef user fill:#096
-    classDef code fill:#f96
-    classDef code_choice fill:#999
-    A1(Press Launcher desktop shortcut / click Launcher.exe):::user
-    A2(press connect):::user
-    A3(press update):::user
-    A4(press play):::user
-    A5(press X / Alt+F4 etc):::user
-    P1(Start Launcher):::code
-    P2(read ip/address+port from last session file):::code
-    P3(leave ip/address+port empty):::code
-    P4(Create UI window):::code
-    P5(set server address label):::code
-    P6(Connect to server and retrieve version number):::code
-    P7(show version retrieve error message):::code
-    P8(show current version):::code
-    P9(check installed version):::code
-    P10(display update button):::code
-    P11(display play button):::code
-    P12(erase installed version):::code
-    P13(download given version):::code
-    P14(show download error message):::code
-    P15(extract downloaded version):::code
-    P16(erase artifacts before trying again):::code
-    P17(start game):::code
-    PFinal(Close Launcher):::code
-    C1{last session file exists}:::code_choice
-    C2{success retrieving version?}:::code_choice
-    C3{same version?}:::code_choice
-    C4{download success?}:::code_choice
-    C5{extract success?}:::code_choice
+    A1(Press Launcher desktop shortcut / click Launcher.exe)
+    A2(press connect)
+    A3(press update)
+    A4(press play)
+    A5(press X / Alt+F4 etc)
+    P1(Start Launcher)
+    P2(read ip/address+port from last session file)
+    P3(leave ip/address+port empty)
+    P4(Create UI window)
+    P5(set server address label)
+    P6(Connect to server and retrieve version number)
+    P7(show version retrieve error message)
+    P8(show current version)
+    P9(check installed version)
+    P10(display update button)
+    P11(display play button)
+    P12(erase installed version)
+    P13(download given version)
+    P14(show download error message)
+    P15(extract downloaded version)
+    P16(erase artifacts before trying again)
+    P17(start game)
+    PFinal(Close Launcher)
+    C1{last session file exists}
+    C2{success retrieving version?}
+    C3{same version?}
+    C4{download success?}
+    C5{extract success?}
 
+    %%start launcher%%
     A1 --> P1
     P1 --> C1
     C1 -- yes --> P2
@@ -52,9 +50,11 @@ flowchart TD
     P2 & P3 --> P4
     P4 --> P5
 
+    %%end%%
     P5 & P7 & P10 & P11 & P16 --> A5
     A5 --> PFinal
 
+    %%connect%%
     P5 --> A2
     A2 --> P6
     P6 --> C2
@@ -63,6 +63,7 @@ flowchart TD
     C2 -- yes --> P8
     P8 --> P9
     
+    %%update%%
     P9 --> C3
     C3 -- no --> P10
     C3 -- yes --> P11
@@ -78,6 +79,7 @@ flowchart TD
     C5 -- no --> A3
     C5 -- yes --> P11
 
+    %%play%%
     P11 --> A4
     A4 --> P17
     P17 --> PFinal
