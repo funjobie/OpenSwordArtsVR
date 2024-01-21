@@ -199,10 +199,10 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    foo("Press Launcher desktop shortcut click Launcher exe") --> bar
+    foo("foo1 foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11") --> bar
 ```
 
 ```mermaid
 flowchart TD
-    foo(Press Launcher desktop shortcut click Launcher exe) --> bar
+    foo(foo1 foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11) --> bar
 ```
