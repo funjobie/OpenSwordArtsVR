@@ -16,7 +16,4 @@ flowchart TD
     Press Launcher desktop shortcut / click Launcher.exe --> Start Launcher
     Start Launcher --> last session file exists
     last session file exists -- yes --> read ip/address+port from last session file
-    last session file exists -- no --> leave ip/address+port empty
-    read ip/address+port from last session file & leave ip/address+port empty --> Create UI window
-    Create UI window --> set server address label
 ```
