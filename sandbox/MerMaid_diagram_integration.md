@@ -189,12 +189,12 @@ Reminder that MerMaid processor that runs on github requires explicit quotations
 
 ```mermaid
 flowchart TD
-    foo("Launcher.exe") --> bar
+    foo("Press Launcher desktop shortcut / click Launcher.exe") --> bar
 ```
 
 ```mermaid
 flowchart TD
-    foo(Launcher.exe) --> bar
+    foo(Press Launcher desktop shortcut / click Launcher.exe) --> bar
 ```
 
 ```mermaid
