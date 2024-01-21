@@ -19,12 +19,4 @@ flowchart TD
     last session file exists -- no --> leave ip/address+port empty
     read ip/address+port from last session file & leave ip/address+port empty --> Create UI window
     Create UI window --> set server address label
-    set server address label & show version retrieve error message & display update button & display play button & erase artifacts before trying again --> A5
-    press X / Alt+F4 etc --> Close Launcher
-    set server address label --> press connect
-    press connect --> Connect to server and retrieve version number
-    Connect to server and retrieve version number --> success retrieving version?
-    success retrieving version? -- no --> show version retrieve error message
-    show version retrieve error message -- retry or maybe change address --> press connect
-    success retrieving version? -- yes --> show current version
 ```
