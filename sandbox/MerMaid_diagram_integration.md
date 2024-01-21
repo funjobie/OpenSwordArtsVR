@@ -181,3 +181,18 @@ xy chart:
     bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
     line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
 ```
+
+
+Bugs and curiosities:
+
+Reminder that MerMaid processor that runs on github requires explicit quotations around nodes, whereas the live editor on MerMaid does not.
+
+```mermaid
+flowchart TD
+    foo("a long string") --> bar("another one")
+```
+
+```mermaid
+flowchart TD
+    foo(a long string) --> bar(another one)
+```
