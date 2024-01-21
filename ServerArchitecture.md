@@ -41,17 +41,14 @@ flowchart TD
     C3{same version?}
     C4{download success?}
     C5{extract success?}
-
     A1 --> P1
     P1 --> C1
     C1 -- yes --> P2
     C1 -- no --> P3
     P2 & P3 --> P4
     P4 --> P5
-
     P5 & P7 & P10 & P11 & P16 --> A5
     A5 --> PFinal
-
     P5 --> A2
     A2 --> P6
     P6 --> C2
@@ -59,7 +56,6 @@ flowchart TD
     P7 -- retry or maybe change address --> A2
     C2 -- yes --> P8
     P8 --> P9
-    
     P9 --> C3
     C3 -- no --> P10
     C3 -- yes --> P11
@@ -74,7 +70,6 @@ flowchart TD
     P15 --> C5
     C5 -- no --> A3
     C5 -- yes --> P11
-
     P11 --> A4
     A4 --> P17
     P17 --> PFinal
