@@ -13,5 +13,5 @@ It can be phased out once a game is released on steam or another distribution pl
 
 ```mermaid
 flowchart TD
-    foo(Press Launcher desktop shortcut / click Launcher.exe) --> bar(Start Launcher)
+    foo("Press Launcher desktop shortcut / click Launcher.exe") --> bar("Start Launcher")
 ```
