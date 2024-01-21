@@ -189,20 +189,20 @@ Reminder that MerMaid processor that runs on github requires explicit quotations
 
 ```mermaid
 flowchart TD
-    foo("a long / string") --> bar
+    foo("Launcher.exe") --> bar
 ```
 
 ```mermaid
 flowchart TD
-    foo(a long / string) --> bar
+    foo(Launcher.exe) --> bar
 ```
 
 ```mermaid
 flowchart TD
-    foo("a long string") --> bar
+    foo("Launcher exe") --> bar
 ```
 
 ```mermaid
 flowchart TD
-    foo(a long string) --> bar
+    foo(Launcher exe) --> bar
 ```
