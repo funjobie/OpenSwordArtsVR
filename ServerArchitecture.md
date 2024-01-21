@@ -14,6 +14,4 @@ It can be phased out once a game is released on steam or another distribution pl
 ```mermaid
 flowchart TD
     Press Launcher desktop shortcut / click Launcher.exe --> Start Launcher
-    Start Launcher --> last session file exists
-    last session file exists -- yes --> read ip/address+port from last session file
 ```
