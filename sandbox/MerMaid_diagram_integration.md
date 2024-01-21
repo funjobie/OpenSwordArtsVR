@@ -216,3 +216,8 @@ flowchart TD
 flowchart TD
     foo(Press Launcher desktop shortcut foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11 foo12 foo13 foo15 foo16 foo17 click Launcher.exe) --> bar
 ```
+
+```mermaid
+flowchart TD
+    foo(Press Launcher desktop shortcut foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11 foo12 foo13 foo15 foo16 foo17 click Launcher exe) --> bar
+```
