@@ -13,64 +13,36 @@ It can be phased out once a game is released on steam or another distribution pl
 
 ```mermaid
 flowchart TD
-    A1(Press Launcher desktop shortcut / click Launcher.exe)
-    A2(press connect)
-    A3(press update)
-    A4(press play)
-    A5(press X / Alt+F4 etc)
-    P1(Start Launcher)
-    P2(read ip/address+port from last session file)
-    P3(leave ip/address+port empty)
-    P4(Create UI window)
-    P5(set server address label)
-    P6(Connect to server and retrieve version number)
-    P7(show version retrieve error message)
-    P8(show current version)
-    P9(check installed version)
-    P10(display update button)
-    P11(display play button)
-    P12(erase installed version)
-    P13(download given version)
-    P14(show download error message)
-    P15(extract downloaded version)
-    P16(erase artifacts before trying again)
-    P17(start game)
-    PFinal(Close Launcher)
-    C1{last session file exists}
-    C2{success retrieving version?}
-    C3{same version?}
-    C4{download success?}
-    C5{extract success?}
-    A1 --> P1
-    P1 --> C1
-    C1 -- yes --> P2
-    C1 -- no --> P3
-    P2 & P3 --> P4
-    P4 --> P5
-    P5 & P7 & P10 & P11 & P16 --> A5
-    A5 --> PFinal
-    P5 --> A2
-    A2 --> P6
-    P6 --> C2
-    C2 -- no --> P7
-    P7 -- retry or maybe change address --> A2
-    C2 -- yes --> P8
-    P8 --> P9
-    P9 --> C3
-    C3 -- no --> P10
-    C3 -- yes --> P11
-    P10 --> A3
-    A3 --> P12
-    P12 --> P13
-    P13 --> C4
-    C4 -- no -->P14
-    P14 --> P16
-    P16 --> A3
-    C4 -- yes -->P15
-    P15 --> C5
-    C5 -- no --> A3
-    C5 -- yes --> P11
-    P11 --> A4
-    A4 --> P17
-    P17 --> PFinal
+    Press Launcher desktop shortcut / click Launcher.exe --> Start Launcher
+    Start Launcher --> last session file exists
+    last session file exists -- yes --> read ip/address+port from last session file
+    last session file exists -- no --> leave ip/address+port empty
+    read ip/address+port from last session file & leave ip/address+port empty --> Create UI window
+    Create UI window --> set server address label
+    set server address label & show version retrieve error message & display update button & display play button & erase artifacts before trying again --> A5
+    press X / Alt+F4 etc --> Close Launcher
+    set server address label --> press connect
+    press connect --> Connect to server and retrieve version number
+    Connect to server and retrieve version number --> success retrieving version?
+    success retrieving version? -- no --> show version retrieve error message
+    show version retrieve error message -- retry or maybe change address --> press connect
+    success retrieving version? -- yes --> show current version
+    show current version --> check installed version
+    check installed version --> same version?
+    same version? -- no --> display update button
+    same version? -- yes --> display play button
+    display update button --> press update
+    press update --> erase installed version
+    erase installed version --> download given version
+    download given version --> download success?
+    download success? -- no -->show download error message
+    show download error message --> erase artifacts before trying again
+    erase artifacts before trying again --> press update
+    download success? -- yes -->extract downloaded version
+    extract downloaded version --> extract success?
+    extract success? -- no --> press update
+    extract success? -- yes --> display play button
+    display play button --> press play
+    press play --> start game
+    start game --> Close Launcher
 ```
