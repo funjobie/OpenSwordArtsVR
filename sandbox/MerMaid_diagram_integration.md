@@ -185,17 +185,8 @@ xy chart:
 
 Bugs and curiosities:
 
-Reminder that MerMaid processor that runs on github requires explicit quotations around nodes when using certain chars, whereas the live editor on MerMaid does not.
-
-```mermaid
-flowchart TD
-    foo("foooooooooooo barrrrrrrrrrr") --> bar
-```
-
-```mermaid
-flowchart TD
-    foo(foooooooooooo barrrrrrrrrrr) --> bar
-```
+Reminder that MerMaid processor that runs on github requires explicit quotations around nodes, whereas the live editor on MerMaid does not.
+Exact conditions could not be determined. Just be safe and always use spaces.
 
 
 ```mermaid
@@ -206,29 +197,4 @@ flowchart TD
 ```mermaid
 flowchart TD
     foo(Press Launcher desktop shortcut / click Launcher.exe) --> bar
-```
-
-```mermaid
-flowchart TD
-    foo("Press Launcher desktop shortcut foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11 foo12 foo13 foo15 foo16 foo17 / click Launcher.exe") --> bar
-```
-
-```mermaid
-flowchart TD
-    foo(Press Launcher desktop shortcut foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11 foo12 foo13 foo15 foo16 foo17 / click Launcher.exe) --> bar
-```
-
-```mermaid
-flowchart TD
-    foo("Press Launcher desktop shortcut foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11 foo12 foo13 foo15 foo16 foo17 click Launcher.exe") --> bar
-```
-
-```mermaid
-flowchart TD
-    foo(Press Launcher desktop shortcut foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11 foo12 foo13 foo15 foo16 foo17 click Launcher.exe) --> bar
-```
-
-```mermaid
-flowchart TD
-    foo(Press Launcher desktop shortcut foo2 foo3 foo4 foo5 foo6 foo7 foo8 foo9 foo10 foo11 foo12 foo13 foo15 foo16 foo17 click Launcher exe) --> bar
 ```
