@@ -185,14 +185,24 @@ xy chart:
 
 Bugs and curiosities:
 
-Reminder that MerMaid processor that runs on github requires explicit quotations around nodes, whereas the live editor on MerMaid does not.
+Reminder that MerMaid processor that runs on github requires explicit quotations around nodes when using certain chars, whereas the live editor on MerMaid does not.
 
 ```mermaid
 flowchart TD
-    foo("a long string") --> bar("another one")
+    foo("a long / string") --> bar
 ```
 
 ```mermaid
 flowchart TD
-    foo(a long string) --> bar(another one)
+    foo(a long / string) --> bar
+```
+
+```mermaid
+flowchart TD
+    foo("a long string") --> bar
+```
+
+```mermaid
+flowchart TD
+    foo(a long string) --> bar
 ```
