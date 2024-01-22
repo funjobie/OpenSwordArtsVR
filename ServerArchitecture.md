@@ -46,6 +46,7 @@ flowchart TD
     P6("Connect to server and retrieve version number"):::code
     P7("show version retrieve error message"):::code
     P8("show current version"):::code
+    P8_1("persist ip/address+port to last session file")
     P9("check installed version"):::code
     P10("display update button"):::code
     P11("display play button"):::code
@@ -81,7 +82,8 @@ flowchart TD
     C2 -- no --> P7
     P7 -- retry or maybe change address --> A2
     C2 -- yes --> P8
-    P8 --> P9
+    P8 --> P8_1
+    P8_1 --> P9
     
     %%update%%
     P9 --> C3
