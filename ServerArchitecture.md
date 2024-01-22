@@ -8,8 +8,25 @@ List of non-game components:
 | ServerLoginQueue  | This server is the entry point when a player wants to login. It has a queue where a new login attempt is inserted into. It is in contact with the ServerSessionManagers, which tell how many more sesions they can handle, and distributes among them. Once through the queue, the server tells the IP of the SessionManager to the client and disconnects|
 | ServerSessionManagers  | This server is the manages the connection to the client. It has a fixed capacity, e.g. 1000 sessions, so it does not get overwhelmed. It can interact with the ServerGameDatabase to get character data, and other ServerSessionManagers in case synchronization is needed. It might be that multiple instances are responsible for different levels, then a take-over when switching will be done |
 
-Flowchart for the Launcher. This minimalistic launcher does not support partial updates, it retrieves the entire game on update.
+#Launcher
+
+This minimalistic launcher does not support partial updates, it retrieves the entire game on update.
 It can be phased out once a game is released on steam or another distribution platform, which would then handle the updates.
+
+```mermaid
+sequenceDiagram
+    ClientLauncher->>+ServerGameVersionProvider: Get current version
+    ServerGameVersionProvider-->>-ClientLauncher: 1.0.0
+    ClientLauncher-->>+ClientLauncher: delete old version
+    ClientLauncher->>+CDN: download 1.0.0
+    CDN-->>-ClientLauncher: 1.0.0
+    ClientLauncher-->>+ClientLauncher: extract
+    ClientLauncher->>+Game: start 1.0.0
+    Game-->>-ClientLauncher: ""
+    ClientLauncher-->>+ClientLauncher: close
+```
+
+Detailed Flowchart of user interaction for the Launcher.
 
 ```mermaid
 flowchart TD
