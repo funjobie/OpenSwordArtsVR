@@ -107,11 +107,24 @@ flowchart TD
     P17 --> PFinal
 ```
 
-Extension ideas:
+## Extension ideas:
+
+### diff update
 a diff update can be established, by just creating an archive which contains all new and changed files, plus a changes.txt file. that file lists all files to erase.
 such a diff refers to two versions, e.g. 
 1.0.0_to_1.1.0.zip
 This can be implemented once the project side has grown to a point where a full update takes annoyingly long. (say more than 30 sec)
 the diff package could be prepared by a simple command line tool that takes two versions and builds the change.
+
+### download in parts
+at some points full releases would become too large to be contained in a single file.
+so part download might be needed, e.g. 1.0.0_part0 etc.
+likewise some parts might be kept constant to avoid re-download (e.g. specific assets like models)
+
+### file sizes
+github releases can be up to 2GB in size, per file.
+probably once the total size approaches 1GB or a regular user-base > 1000 it would make sense to look for a dedicated CDN to host the files.
+see also github doc
+https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github
 
 # ServerLoginQueue
