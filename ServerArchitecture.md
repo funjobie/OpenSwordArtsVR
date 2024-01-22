@@ -8,7 +8,7 @@ List of non-game components:
 | ServerLoginQueue  | This server is the entry point when a player wants to login. It has a queue where a new login attempt is inserted into. It is in contact with the ServerSessionManagers, which tell how many more sesions they can handle, and distributes among them. Once through the queue, the server tells the IP of the SessionManager to the client and disconnects|
 | ServerSessionManagers  | This server is the manages the connection to the client. It has a fixed capacity, e.g. 1000 sessions, so it does not get overwhelmed. It can interact with the ServerGameDatabase to get character data, and other ServerSessionManagers in case synchronization is needed. It might be that multiple instances are responsible for different levels, then a take-over when switching will be done |
 
-#Launcher
+# Launcher
 
 This minimalistic launcher does not support partial updates, it retrieves the entire game on update.
 It can be phased out once a game is released on steam or another distribution platform, which would then handle the updates.
@@ -104,3 +104,12 @@ flowchart TD
     A4 --> P17
     P17 --> PFinal
 ```
+
+Extension ideas:
+a diff update can be established, by just creating an archive which contains all new and changed files, plus a changes.txt file. that file lists all files to erase.
+such a diff refers to two versions, e.g. 
+1.0.0_to_1.1.0.zip
+This can be implemented once the project side has grown to a point where a full update takes annoyingly long. (say more than 30 sec)
+the diff package could be prepared by a simple command line tool that takes two versions and builds the change.
+
+# ServerLoginQueue
