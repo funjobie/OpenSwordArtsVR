@@ -46,7 +46,7 @@ flowchart TD
     P6("Connect to server and retrieve version number"):::code
     P7("show version retrieve error message"):::code
     P8("show current version"):::code
-    P8_1("persist ip/address+port to last session file")
+    P8_1("persist ip/address+port to last session file"):::code
     P9("check installed version"):::code
     P10("display update button"):::code
     P11("display play button"):::code
