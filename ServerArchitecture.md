@@ -120,6 +120,10 @@ the diff package could be prepared by a simple command line tool that takes two 
 at some points full releases would become too large to be contained in a single file.
 so part download might be needed, e.g. 1.0.0_part0 etc.
 likewise some parts might be kept constant to avoid re-download (e.g. specific assets like models)
+this could be achieved by returning an array from the ServerGameVersionProvider e.g.
+Client_1.0.0
+AssetPack1_1.0.0
+AssetPack2_1.2.0
 
 ### file sizes
 github releases can be up to 2GB in size, per file.
