@@ -132,3 +132,23 @@ see also github doc
 https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github
 
 # ServerLoginQueue
+
+```mermaid
+sequenceDiagram
+    autonumber
+    alt no keypair
+        Game->>+Game: Create public+private key pair
+    end
+    alt no clientID
+        Game->>+ServerLoginQueue: RegisterNewClient(public key)
+        ServerLoginQueue->>+ServerLoginQueue: Queue calls to reduce parallel calls to DB server
+        ServerLoginQueue->>+ServerGameDatabase: RegisterNewClient(public key)
+        ServerGameDatabase->>-ServerLoginQueue: clientID
+        ServerLoginQueue->>-Game: clientID
+        Game->>+Game: save clientID to local file
+    end
+    Game->>+ServerLoginQueue: Login(clientID)
+        %%todo continue
+    ServerLoginQueue->>+Game: token
+    
+```
