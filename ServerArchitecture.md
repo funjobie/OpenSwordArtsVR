@@ -147,8 +147,19 @@ sequenceDiagram
         ServerLoginQueue->>-Game: clientID
         Game->>+Game: save clientID to local file
     end
-    Game->>+ServerLoginQueue: Login(clientID)
-        %%todo continue
+    Game->>+Game: create token
+    Game->>+ServerLoginQueue: Login(token)
+    ServerLoginQueue->>+ServerGameDatabase: VerifyToken
+    ServerGameDatabase->>-ServerLoginQueue: confirmation result
+    alt bad token
+        ServerLoginQueue->>-Game: reject login
+    end
+    ServerLoginQueue->>+ServerLoginQueue: Queue call until a slot is free
+    ServerLoginQueue->>+ServerSessionManagers: announce upcoming client(token)
+    ServerSessionManagers->>-ServerLoginQueue: acknowledge
     ServerLoginQueue->>+Game: token
-    
+    Game->>+ServerSessionManagers: login
+    alt not announced client
+        ServerSessionManagers->>-Game: reject login
+    end
 ```
