@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpinyjgfsvwid"]
+
+[ext_resource type="Script" path="res://dbserver.gd" id="1_d18c4"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d18c4")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 963.0
+offset_bottom = 533.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 1088.0
+offset_bottom = 600.0
+focus_mode = 2
+bbcode_enabled = true
+selection_enabled = true

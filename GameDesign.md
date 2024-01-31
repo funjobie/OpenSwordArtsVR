@@ -22,3 +22,19 @@ can also heal but would for example apply bandages.
 archer: classic bow and arrow, using realistic controls and physics.
 
 mage: classic mage. but controls not clear yet.
+
+
+
+
+Also differerentiate the way of getting XP. possibly half-half (e.g. combat 50% and off-combat 50%. current level is min(combat,off-combat).
+E.g. mage: studying tomes
+Bard: perform
+Warrior: combat, maybe duels in arena
+Archer: hunting wildlife
+Arrow mechanic, limit to ca 8 arrows in quiver, recall mechanics, arrows as customizable equipment
+
+
+markets, vendor booth
+Time slots are locked and drawn 48h in advance
+Players can register for as many slots as they want, but only have one active at a time.
+24h before, player must have given up others at same time which fall to second bidders
