@@ -140,7 +140,8 @@ sequenceDiagram
         Game->>+Game: Create public+private key pair
     end
     alt no clientID
-        Game->>+ServerLoginQueue: RegisterNewClient(public key)
+        Game->>+ServerLoginQueue: RegisterNewClient(public key, optional server pw)
+        ServerLoginQueue->>+ServerLoginQueue: Verify pw, reject if wrong
         ServerLoginQueue->>+ServerLoginQueue: Queue calls to reduce parallel calls to DB server
         ServerLoginQueue->>+ServerGameDatabase: RegisterNewClient(public key)
         ServerGameDatabase->>-ServerLoginQueue: clientID
@@ -148,7 +149,8 @@ sequenceDiagram
         Game->>+Game: save clientID to local file
     end
     Game->>+Game: create token
-    Game->>+ServerLoginQueue: Login(token)
+    Game->>+ServerLoginQueue: Login(token, optional server pw)
+    ServerLoginQueue->>+ServerLoginQueue: Verify pw, reject if wrong
     ServerLoginQueue->>+ServerGameDatabase: VerifyToken
     ServerGameDatabase->>-ServerLoginQueue: confirmation result
     alt bad token
