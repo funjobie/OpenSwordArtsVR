@@ -34,7 +34,46 @@ Archer: hunting wildlife
 Arrow mechanic, limit to ca 8 arrows in quiver, recall mechanics, arrows as customizable equipment
 
 
-markets, vendor booth
-Time slots are locked and drawn 48h in advance
-Players can register for as many slots as they want, but only have one active at a time.
-24h before, player must have given up others at same time which fall to second bidders
+# Trade and housing
+
+In games that enable trading, there are (at least) two categories:
+ - some games hide trading away behind UIs, like the market board in FFXIV
+ - same games let players choose where to setup trading, to some degree, but don't really ensure a clean city layout (e.g. ragnarok online)
+Also, while some players may want to go deep into interior design, the vast majority just want to trade.
+There is also the topic that player owned shops can have a tendendy to cause a dead-game impression as people over time get inactive and leave their claims behind.
+
+In this design, players bid for market spaces. The bidding works as follows:
+Until the end of the bidding phase, each player can bid for any kind of asset and put down any amount of in-game currency.
+The money is locked and automatically returned if the player does not win the bid.
+When the bidding phase ends, the highest bidder is informed and now has to commit. There can only be one commitment per category, so only one "trade" asset rented at a time.
+The player has time until the commit phase ends to decide which one to take. 
+Once the player has commited, the payment is due and the player bid is taken, however not the full amount but rather the amount of the second-highest bidder.
+
+The amount a player bids increases the chance of winning, but with a reduced impact.
+the relative weight is equal to the log2 of the bid.
+so a player bidding 1 coin has a weight of 1, but a player bidding 1000 has a weight of ~10.
+This gives a realistic chance to win also for newcomers and casual players. It also acts as a money-sink.
+
+certain kind of shops are locked to trading categories. This is done both from an astetic but also gameplay perspective:
+ - a potion shop can be designed by the level designer with a lot of care, while a player from the outside can see its a potion shop and enter with certain expectations
+
+The different shop and stall options are meant to target different kinds of players. Some players want to go deeper into the experience of trading, while others might just want to cash in 1-2 items.
+
+The custom shop in particular allow the player to setup the store layout however they want (with limits of course).
+The details on this will need a lot of fine-tuning. But there are options from just being able to change a few settings to full "empty-room to full shop decoration" builds.
+
+| Asset                | category | bidding phase | commit phase | rental duration | notes                                     | customizable |
+| -------------------- | -------- | ------------- | ------------ | --------------- | ----------------------------------------- | ------------ |
+| weapon shop          | trade    | 48h           | 24h          | 1h              | locked to trading weapons                 | no           |
+| potion shop          | trade    | 48h           | 24h          | 1h              | locked to trading potions and ingredients | no           |
+| armor shop           | trade    | 48h           | 24h          | 1h              | locked to trading armor                   | no           |
+| pawn shop            | trade    | 48h           | 24h          | 1h              | locked to selling to the owner            | no           |
+| general purpose shop | trade    | 48h           | 24h          | 1h              | no trade restrictions                     | no           |
+| custom shop          | trade    | 7d            | 3d           | 7d              | no trade restrictions                     | yes          |
+| small stall          | trade    | 24h           | 6h           | 30m             | no trade restrictions                     | no           |
+| custom stall         | trade    | 3d            | 1d           | 2h              | no trade restrictions                     | yes          |
+| open trade space     | trade    | 2h            | 1h           | 15m             | no trade restrictions                     | no           |
+
+similar alternatives can be considered for player housing, as well as event squares.
+housing would be e.g. pre-build houses, renting an apartment.
+event can be an empty event square, renting a bar etc.
