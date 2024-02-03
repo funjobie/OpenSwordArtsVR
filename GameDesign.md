@@ -48,6 +48,7 @@ The money is locked and automatically returned if the player does not win the bi
 When the bidding phase ends, the highest bidder is informed and now has to commit. There can only be one commitment per category, so only one "trade" asset rented at a time.
 The player has time until the commit phase ends to decide which one to take. 
 Once the player has commited, the payment is due and the player bid is taken, however not the full amount but rather the amount of the second-highest bidder.
+If the player does not commit then among their claims with hiddest bid invest, one is chosen at random.
 
 The amount a player bids increases the chance of winning, but with a reduced impact.
 the relative weight is equal to the log2 of the bid.
