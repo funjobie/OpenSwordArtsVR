@@ -70,7 +70,7 @@ func GetVersionFromDB(db) -> int:
 	return selected_array[0][DB_VERSION_TABLE_VERSION_COLUMN_NAME]
 
 # Called when the node enters the scene tree for the first time.
-func open_db() -> void:
+func open_db() -> bool:
 	
 	logger.log_and_print(Logger.LogLevel.INFO,"starting open_db")
 	var db = SQLite.new()
@@ -92,7 +92,7 @@ func open_db() -> void:
 	var localVersion : int = GetVersionFromDB(db)
 	if localVersion == INCONSISTENT_VERSION_IN_DB:
 		logger.log_and_print(Logger.LogLevel.ERR, "database has inconsistent versions; startup is stopped. this is not supposed to happen, consider reporting as a bug and erasing the db. ")
-		return
+		return false
 	elif localVersion == NO_VERSION_IN_DB:
 		logger.log_and_print(Logger.LogLevel.INFO, "db does not contain version number yet -> creating table structures")
 		create_tables_if_not_existing(db)
@@ -100,13 +100,13 @@ func open_db() -> void:
 	elif localVersion < CURRENT_DB_VERSION:
 		logger.log_and_print(Logger.LogLevel.INFO, "db is outdated -> updating structure")
 		if not upgrade_tables(db, localVersion, CURRENT_DB_VERSION):
-			return
+			return false
 		#todo
 	elif localVersion > CURRENT_DB_VERSION:
 		logger.log_and_print(Logger.LogLevel.ERR, "database has greater version than expected; startup is stopped. rolling back to previous software versions is currently not supported.")
-		return
+		return false
 	else: #same version
 		logger.log_and_print(Logger.LogLevel.INFO, "db version is up to date")
 	
 	logger.log_and_print(Logger.LogLevel.INFO,"finished open_db")
-	pass # Replace with function body.
+	return true
