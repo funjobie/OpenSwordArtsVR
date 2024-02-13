@@ -2,10 +2,13 @@ extends Node
 class_name Server
 
 var logger : Logger
-var peer : StreamPeerTLS
+var peers : Array[StreamPeerTLS]
 var tls_options : TLSOptions
 var crypto_key : CryptoKey
 var certificate : X509Certificate
+var server : TCPServer
+# choosing a default that has a good chance of being unused: https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
+const port : int = 34077
 
 func _init(newLogger:Logger):
 	logger = newLogger
@@ -37,9 +40,45 @@ func open_server() -> bool:
 		return false
 	logger.log_and_print(Logger.LogLevel.INFO, "successfully loaded OpenSwordsServerInternal.crt")
 		
-	#peer = StreamPeerTLS.new()
-	#tls_options = TLSOptions.server(crypto_key, certificate)
+	tls_options = TLSOptions.server(crypto_key, certificate)
+	server = TCPServer.new()
+	server.listen(port)
 	
-	#var stream : StreamPeer
-	#var error = peer.accept_stream(stream, tls_options)
 	return true
+
+func process() -> void:
+	
+	if server.is_connection_available():
+		logger.log_and_print(Logger.LogLevel.INFO, "new connection available")
+		var tcp_peer : StreamPeerTCP = server.take_connection()
+		var tls_peer : StreamPeerTLS = StreamPeerTLS.new()
+		tls_peer.accept_stream(tcp_peer, tls_options)
+		peers.append(tls_peer)
+	
+	var peers_to_remove : Array[StreamPeerTLS]
+	for peer in peers:
+		match peer.get_status():
+			StreamPeerTLS.Status.STATUS_DISCONNECTED:
+				logger.log_and_print(Logger.LogLevel.INFO, "connection disconnected")
+				peers_to_remove.append(peer)
+			StreamPeerTLS.Status.STATUS_HANDSHAKING:
+				logger.log_and_print(Logger.LogLevel.INFO, "connection still at handshaking")
+				peers_to_remove.append(peer)
+			StreamPeerTLS.Status.STATUS_CONNECTED:
+				#log probably to be commented out to avoid spam
+				logger.log_and_print(Logger.LogLevel.INFO, "connection still connected")
+				peer.poll()
+				#todo process changes
+			StreamPeerTLS.Status.STATUS_ERROR:
+				logger.log_and_print(Logger.LogLevel.INFO, "connection encountered an unspecified error")
+				peers_to_remove.append(peer)
+			StreamPeerTLS.Status.STATUS_ERROR_HOSTNAME_MISMATCH:
+				logger.log_and_print(Logger.LogLevel.INFO, "connection encountered a hostname mismatch")
+				peers_to_remove.append(peer)
+	
+	for peer in peers_to_remove:
+		peers.erase(peer)
+	#log commented out to avoid spam
+	#logger.log_and_print(Logger.LogLevel.INFO, "number of open connections: " + str(peers.size()))
+	
+	pass
