@@ -19,7 +19,7 @@ func _ready() -> void:
 	if not server.open_server():
 		logger.log_and_print(Logger.LogLevel.ERR, "an error occured opening the server")
 		return
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
