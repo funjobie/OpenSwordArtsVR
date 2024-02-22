@@ -1,5 +1,30 @@
 # Game Design document
 
+# Combat
+
+combat is divided into 3 seperate aspects that all combine to present the challenge that the player has to overcome.
+1. songs and beats
+2. player driven skills
+3. enemy skills
+
+the core gameplay can be a beat-saber inspired loop, but instead of everything being mapped into individual songs, the 3 parts contribute.
+The songs are mapped and for all supported difficulties the beat positions are identifed.
+maybe the songs also influence lighting, but not sure on that.
+however for sure the beats in the songs do not represent individual box positions - those come from the other 2 categories.
+
+Player driven skills generate boxes(or other variants) to hit.
+for example a "basic sword combo" may be represented as 3 slashing hits in succession, followed by a heavy attack.
+those are then aligned to the note positions given by the song.
+of there are no note positions anywhere near where the attack pattern expects them, it just means that the player looses one opportunity to strike. (e.g. 3 out of 4 hits)
+
+similar for enemy skills. an enemy may perform a basic combo, which then results in 3 dodge patterns (or block/parry etc, depending on classes).
+
+this means that overall, game designers have to map less and there is overall more dynamic flow.
+there is however the danger of it feeling very generic. hence there might be a need to differentiate a lot with different enemies.
+possibly, players can't directly choose all their abilities but have more a pool of possible moves to do next, so they cannot spam the same move.
+
+maybe "encouters" could be a forth thing, that define the stage, enemy composition, environment and so on.
+
 # Classes
 
 X (Viper): Melee class with two swords. Gameplay is a more intense beat-saber style with hit blocks moving towards you. is mobile.

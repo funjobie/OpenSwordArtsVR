@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bip414y6alv80"]
+[gd_scene load_steps=3 format=3 uid="uid://bip414y6alv80"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_m1p7v"]
+[ext_resource type="Script" path="res://logger.gd" id="2_yo4o1"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,3 +11,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m1p7v")
+
+[node name="LoggerRichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 1138.0
+offset_bottom = 640.0
+focus_mode = 2
+bbcode_enabled = true
+selection_enabled = true
+script = ExtResource("2_yo4o1")
