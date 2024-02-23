@@ -49,6 +49,11 @@ func open_server() -> bool:
 	
 	return true
 
+func process_packet(packet, peer : StreamPeerTLS) -> void:
+	#todo probably comment out later, might spam
+	logger.log_and_print(Logger.LogLevel.INFO, "received packet of type: " + packet.packet_type)
+	pass
+
 func process() -> void:
 	
 	if not server:
@@ -77,8 +82,12 @@ func process() -> void:
 				peers_to_remove.append(peer)
 			StreamPeerTLS.Status.STATUS_CONNECTED:
 				#log probably to be commented out to avoid spam
-				logger.log_and_print(Logger.LogLevel.INFO, "connection still connected")
+				#logger.log_and_print(Logger.LogLevel.INFO, "connection still connected")
 				peer.poll()
+				if peer.get_available_bytes() > 0:
+					var packet = peer.get_var()
+					if packet:
+						process_packet(packet, peer)
 				#todo process changes
 			StreamPeerTLS.Status.STATUS_ERROR:
 				logger.log_and_print(Logger.LogLevel.INFO, "connection encountered an unspecified error")

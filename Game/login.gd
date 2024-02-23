@@ -20,10 +20,11 @@ enum NextLoginState
 	REGISTRATION_CONNECT_TLS,
 	REGISTRATION_WAIT_FOR_TLS_CONNECTION,
 	REGISTRATION_SEND_REGISTRATION_REQUEST,
+	WAIT_FOR_REGISTRATION_FEEDBACK,
 	LOGINQUEUE_CONNECT,
-	LoginQueue_Connecting,
-	LoginQueue_Connected,
-	LoginQueue_WaitingInQueue,
+#	LoginQueue_Connecting,
+#	LoginQueue_Connected,
+#	LoginQueue_WaitingInQueue,
 	LOGGED_IN,
 	ERROR_SERVER_CERTIFICATE_NOT_AVAILABLE,
 	ERROR_KEYPAIRS_NOT_AVAILABLE,
@@ -112,10 +113,16 @@ func initiate_tls_connection_to_login_server() -> bool:
 	print("current tls status: " + str(tls_peer_to_login_server.get_status()))
 	return tls_error == OK
 
-
 func check_for_tls_login_server_connection() -> StreamPeerTLS.Status:
 	tls_peer_to_login_server.poll()
 	return tls_peer_to_login_server.get_status()
+
+func send_registration_packet() -> void:
+	var client_registration_packet = {}
+	client_registration_packet.packet_type = "REGISTER_CLIENT_ID"
+	client_registration_packet.public_key = clientKey.save_to_string(true)
+	tls_peer_to_login_server.put_var(client_registration_packet)
+	pass
 
 func process_login() -> void:
 	#print("current login state: " + NextLoginState.keys()[login_state]) #spams too much
@@ -187,5 +194,7 @@ func process_login() -> void:
 			return
 		NextLoginState.REGISTRATION_SEND_REGISTRATION_REQUEST:
 			#todo continue
+			send_registration_packet()
+			do_state_change(NextLoginState.WAIT_FOR_REGISTRATION_FEEDBACK)
 			return
 	pass
