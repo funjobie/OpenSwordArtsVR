@@ -10,6 +10,9 @@ var server : TCPServer
 # choosing a default that has a good chance of being unused: https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
 const port : int = 34077
 
+var process_counter : int = 0
+var dropped_packet_counter : int = 0
+
 func _init(newLogger:Logger):
 	logger = newLogger
 	pass
@@ -70,7 +73,7 @@ func process() -> void:
 				peers_to_remove.append(peer)
 			StreamPeerTLS.Status.STATUS_CONNECTED:
 				#log probably to be commented out to avoid spam
-				logger.log_and_print(Logger.LogLevel.INFO, "connection still connected")
+				#logger.log_and_print(Logger.LogLevel.INFO, "connection still connected")
 				peer.poll()
 				#todo process changes
 			StreamPeerTLS.Status.STATUS_ERROR:
@@ -82,7 +85,10 @@ func process() -> void:
 	
 	for peer in peers_to_remove:
 		peers.erase(peer)
-	#log commented out to avoid spam
-	#logger.log_and_print(Logger.LogLevel.INFO, "number of open connections: " + str(peers.size()))
+
+	process_counter = process_counter + 1
+	if process_counter % 300 == 0:
+		logger.log_and_print(Logger.LogLevel.INFO, "number of open connections: " + str(peers.size()))
+		logger.log_and_print(Logger.LogLevel.INFO, "number of dropped packets so far: " + str(dropped_packet_counter))
 	
 	pass
